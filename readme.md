@@ -3,6 +3,9 @@
 * IDE: IntelliJ
 * Java 11
 * Build: Gradle
+* API test: JUnit4, Insomnia, Chrome
+
+<br/>
 
 ## API
 ### A. 점포 추가 API
@@ -10,10 +13,14 @@
     * 점포 등록시 id(Primary Key) 값은 자동 증가처리
     * 영업 시작 시간, 종료시간은 같을 수 없음
 
-메소드 상세설명
+<br/>
+
+#### 상세설명
 * Post
-* boolean addStore(String name, String owner, String description, int level, String addr, String phone, BusinessTime[] businessTimes)
-* 모두 필수 파라미터
+* boolean addStore(String name, String owner, String description, int level, String address, String phone, Date[] businessTimes)
+* /v0/store/addStore?name={name}&owner={owner}&description={description}&level={level}&address={address}&phone={phone}&businessTimes={businessTimes}
+
+<br/>
 
 ### B. 점포 휴무일 등록 API
     영업일 외에 특별한 날을 휴무로 지정
@@ -23,10 +30,14 @@
     인어수산(id : 1)의 휴무일은 과제 마감일, 마감일+1 일(총 2 일)
     예) 과제 마감일이 4 월 30 일이라면 “2021-05-07”, “2021-05-08”
 
-메소드 상세설명
+<br/>
+
+####상세설명
 * Post
 * boolean regStoreHoliday(int id, Date[] holidays)
-* 모두 필수 파라미터
+* url: /v0/store/regStoreHoliday?id={id}&holidays={holidays}
+
+<br/>
 
 ### C. 점포 목록 조회
     점포명, 점포 설명, 영업상태(영업중/영업종료/휴무) 정보를 등급(level)
@@ -36,23 +47,34 @@
         * 영업종료(CLOSE) : 현재시간 < 영업 open time, 현재시간 > 영업 close
           time
         * 휴무(HOLIDAY) : 오늘날짜가 해당 점포의 등록된 휴무일일 경우
-    
-메소드 상세설명
+<br/>
+
+#### 상세설명
 * Get
-* List\<StoreSummary> getStoreList()
-    
+* List\<StoreListDTO> getStoreList()
+* url: /v0/store/storeList
+
+<br/> 
+
+
 ### D. 점포 상세 조회 정보 API
     점포의 상세 정보(점포명, 점포 설명, 주소, 전화번호, 조회 일자 기준 영업시간 3
     일치)
+<br/>
 
-메소드 상세설명
+#### 상세설명
 * Get
-* List\<Store> getStoreDetail()
+* List\<StoreDetailDTO> getStoreDetail()
+* url: /v0/store/storeDetails/{id}
+
+<br/>
 
 
 ### E. 점포 삭제 API
     제휴가 종료된 점포에 대해 삭제 처리
+<br/>
 
-메소드 상세설명
+#### 상세설명
 * Delete(Post)
 * boolean deleteStore(int id)
+* url: /v0/store/deleteStore/{id}
