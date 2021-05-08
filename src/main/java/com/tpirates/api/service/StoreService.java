@@ -1,54 +1,67 @@
 package com.tpirates.api.service;
 
+import com.tpirates.api.dao.store.BusinessTimeDAO;
+import com.tpirates.api.dao.store.HolidayDAO;
 import com.tpirates.api.dao.store.StoreDAO;
-import com.tpirates.api.dao.store.TestDAO;
 import com.tpirates.api.dto.StoreDetailDTO;
 import com.tpirates.api.dto.StoreListDTO;
+import com.tpirates.api.repository.BusinessTimeRepository;
+import com.tpirates.api.repository.HolidayRepository;
+import com.tpirates.api.repository.StoreRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
 public class StoreService {
 
+    private final StoreRepository storeRepository;
+    private final BusinessTimeRepository businessTimeRepository;
+    private final HolidayRepository holidayRepository;
+
     @Transactional
-    public Long addStore(String name, String owner, String description, Long level, String address, String phone, Date[] businessTimes) {
+    public Long addStore(StoreDAO store) {
         System.out.println("StoreService.addStore()");
-        return new Long(0);
+        return storeRepository.save(store).getId();
     }
 
     @Transactional
-    public Long regStoreHoliday(Long id, Date[] holidays) {
+    public Long regStoreHoliday(Long id, String holidays) {
         System.out.println("StoreService.regStoreHoliday()");
-        return new Long(0);
+        HolidayDAO holidayDAO = new HolidayDAO(holidays);
+        return holidayRepository.save(holidayDAO).getId();
     }
 
     // C. 점포 목록 조회 API
     @Transactional(readOnly = true)
     public List<StoreListDTO> findAll() {
-        List<StoreListDTO> storeList = new ArrayList<>();
         System.out.println("StoreService.findAll()");
-        return storeList;
+        List<StoreDAO> list = storeRepository.findAll();
+        return list.stream().map(StoreListDTO::new).collect(Collectors.toList());
     }
 
-    // D. 점포 상세 조회 정보 API
     @Transactional(readOnly = true)
     public StoreDetailDTO findById(Long id) {
-        // StoreDAO entity = null;
+        // TODO: setting businessTimeEntity
+        StoreDAO storeEntity = storeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 점포가 없습니다. id=" + id));
+        //BusinessTimeDAO storeBusinessTimeEntity = businessTimeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 점포가 없습니다. id=" + id));
+        StoreDetailDTO storeDetailDTO = new StoreDetailDTO(storeEntity, null);
 
         System.out.println("StoreService.findById()");
-        return null;
+        return storeDetailDTO;
     }
 
     @Transactional
     public void deleteStore(Long id) {
         System.out.println("StoreService.deleteStore()");
+        StoreDAO posts = storeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 점포가 없습니다. id=" + id));
+
+        storeRepository.delete(posts);
     }
 
 }

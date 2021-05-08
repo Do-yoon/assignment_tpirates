@@ -1,4 +1,4 @@
-package com.tpirates.api.dao.store;
+package com.tpirates.api.dao;
 
 import lombok.Builder;
 import lombok.Getter;

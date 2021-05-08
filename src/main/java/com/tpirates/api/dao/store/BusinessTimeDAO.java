@@ -11,7 +11,7 @@ import java.time.LocalTime;
 @Getter
 @NoArgsConstructor
 @Entity
-public class StoreBusinessTimeDAO {
+public class BusinessTimeDAO {
     @Id
     int id;
     int day;
@@ -19,10 +19,12 @@ public class StoreBusinessTimeDAO {
     LocalTime close;
 
     @Builder
-    public StoreBusinessTimeDAO(int id, int day, LocalTime open, LocalTime close) {
+    public BusinessTimeDAO(int id, int day, LocalTime open, LocalTime close) {
         this.id = id;
         this.day = day;
         this.open = open;
         this.close = close;
     }
+
+    // TODO: parsing businessTimes
 }

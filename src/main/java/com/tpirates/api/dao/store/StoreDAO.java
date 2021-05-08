@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class StoreDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Column(length=20, nullable = false)
     private String name;
@@ -25,7 +25,7 @@ public class StoreDAO {
     private String description;
 
     @Column(nullable = false)
-    private int level;
+    private Long level;
 
     @Column(nullable = false)
     private String address;
@@ -34,8 +34,7 @@ public class StoreDAO {
     private String phone;
 
     @Builder
-    public StoreDAO(String name, String owner, String description, int level, String address, String phone) {
-        super();
+    public StoreDAO(String name, String owner, String description, Long level, String address, String phone) {
         this.name = name;
         this.owner = owner;
         this.description = description;
@@ -43,4 +42,5 @@ public class StoreDAO {
         this.address = address;
         this.phone = phone;
     }
+
 }

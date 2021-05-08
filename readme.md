@@ -3,7 +3,7 @@
 * IDE: IntelliJ
 * Java 11
 * Build: Gradle
-* API test: JUnit, Insomnia, Chrome
+* API test: IntelliJ(generated-request.http), Insomnia(API test tool), Chrome
 
 <br/>
 
@@ -32,10 +32,10 @@
 
 <br/>
 
-####상세설명
+#### 상세설명
 * Post
 * Long regStoreHoliday(Date[] holidays)
-* url: /v0/store/regStoreHoliday/id?holidays={holidays}
+* url: /v0/store/regStoreHoliday?id={id}&holidays={holidays}
 
 <br/>
 
@@ -65,7 +65,7 @@
 #### 상세설명
 * Get
 * List\<StoreDetailDTO> getStoreDetail(Long id)
-* url: /v0/store/storeDetails/{id}
+* url: /v0/store/storeDetails?id={id}
 
 <br/>
 
@@ -77,4 +77,4 @@
 #### 상세설명
 * Delete(Post)
 * Long deleteStore(Long id)
-* url: /v0/store/deleteStore/{id}
+* url: /v0/store/deleteStore?id={id}
