@@ -3,7 +3,7 @@
 * IDE: IntelliJ
 * Java 11
 * Build: Gradle
-* API test: JUnit4, Insomnia, Chrome
+* API test: JUnit, Insomnia, Chrome
 
 <br/>
 
@@ -17,7 +17,7 @@
 
 #### 상세설명
 * Post
-* boolean addStore(String name, String owner, String description, int level, String address, String phone, Date[] businessTimes)
+* Long addStore(String name, String owner, String description, Long level, String address, String phone, Date[] businessTimes)
 * /v0/store/addStore?name={name}&owner={owner}&description={description}&level={level}&address={address}&phone={phone}&businessTimes={businessTimes}
 
 <br/>
@@ -34,8 +34,8 @@
 
 ####상세설명
 * Post
-* boolean regStoreHoliday(int id, Date[] holidays)
-* url: /v0/store/regStoreHoliday?id={id}&holidays={holidays}
+* Long regStoreHoliday(Date[] holidays)
+* url: /v0/store/regStoreHoliday/id?holidays={holidays}
 
 <br/>
 
@@ -64,7 +64,7 @@
 
 #### 상세설명
 * Get
-* List\<StoreDetailDTO> getStoreDetail()
+* List\<StoreDetailDTO> getStoreDetail(Long id)
 * url: /v0/store/storeDetails/{id}
 
 <br/>
@@ -76,5 +76,5 @@
 
 #### 상세설명
 * Delete(Post)
-* boolean deleteStore(int id)
+* Long deleteStore(Long id)
 * url: /v0/store/deleteStore/{id}

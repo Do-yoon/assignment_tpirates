@@ -13,7 +13,7 @@ import java.time.LocalDate;
 public class StoreDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
 
     @Column(length=20, nullable = false)
     private String name;

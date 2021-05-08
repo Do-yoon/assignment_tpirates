@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 public class StoreDetailDTO {
-    private int id;
+    private String id;
     private String name;
     private String description;
     private int level;
