@@ -4,8 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalTime;
 
 @Getter
@@ -13,18 +12,39 @@ import java.time.LocalTime;
 @Entity
 public class BusinessTimeDAO {
     @Id
-    int id;
-    int day;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long key;
+
+    @Column(nullable = false)
+    Long id;
+
+    @Column(length = 10, nullable = false)
+    Long day;
+
+    @Column(nullable = false)
     LocalTime open;
+
+    @Column(nullable = false)
     LocalTime close;
 
     @Builder
-    public BusinessTimeDAO(int id, int day, LocalTime open, LocalTime close) {
+    public BusinessTimeDAO(Long id, Long day, LocalTime open, LocalTime close) {
+        if (open.isAfter(close)) {
+            try {
+            Exception e = new IllegalArgumentException("오픈 시간은 영업 종료 시간보다 빨라야 합니다.");
+            throw e;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         this.id = id;
         this.day = day;
         this.open = open;
         this.close = close;
     }
 
-    // TODO: parsing businessTimes
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 }

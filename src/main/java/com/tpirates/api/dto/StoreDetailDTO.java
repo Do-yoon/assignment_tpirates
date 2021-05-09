@@ -18,17 +18,17 @@ public class StoreDetailDTO {
     private String address;
     private List<BusinessTimeDAO> businessDays;
 
-    public StoreDetailDTO(StoreDAO storeEntity, BusinessTimeDAO businessTimeDAO) {
+    public StoreDetailDTO(StoreDAO storeEntity, List<BusinessTimeDAO> businessTimeEntity) {
         this.id = storeEntity.getId();
         this.name = storeEntity.getName();
         this.description = storeEntity.getDescription();
         this.level = storeEntity.getLevel();
         this.address = storeEntity.getAddress();
-        this.businessDays = getNear3BusinessDays();
+        this.businessDays = getNear3BusinessDays(businessTimeEntity);
     }
 
     // TODO: logic
-    private List<BusinessTimeDAO> getNear3BusinessDays() {
+    private List<BusinessTimeDAO> getNear3BusinessDays(List<BusinessTimeDAO> businessTimeDAO) {
         return new ArrayList<BusinessTimeDAO>();
     }
 

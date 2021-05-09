@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
@@ -27,10 +26,10 @@ public class StoreDAO {
     @Column(nullable = false)
     private Long level;
 
-    @Column(nullable = false)
+    @Column(length = 50, nullable = false)
     private String address;
 
-    @Column(nullable = false)
+    @Column(length = 13, nullable = false)
     private String phone;
 
     @Builder

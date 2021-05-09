@@ -1,30 +1,28 @@
 package com.tpirates.api.dao.store;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import java.time.LocalDateTime;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Getter
 @NoArgsConstructor
 @Entity
 public class HolidayDAO {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long key;
+
     Long id;
 
-    @Column(nullable = false)
-    LocalDateTime holidays;
+    @Column(length = 10, nullable = false)
+    LocalDate holiday;
 
-    public HolidayDAO(String holidays) {
+    @Builder
+    public HolidayDAO(Long id, LocalDate holiday) {
         this.id = id;
-        this.holidays = parse(holidays);
-    }
-
-    // TODO: parsing Holiday Data
-    private LocalDateTime parse(String holidays) {
-        return null;
+        this.holiday = holiday;
     }
 }
