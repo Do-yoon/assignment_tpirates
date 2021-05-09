@@ -76,13 +76,13 @@ public class StoreService {
 
     @Transactional(readOnly = true)
     public StoreDetailDTO findById(Long id) {
-        // TODO: setting businessTimeEntity
         StoreDAO storeEntity = storeRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 점포가 없습니다. id=" + id));
         List<BusinessTimeDAO> businessTimeEntity = businessTimeRepository.findByStoreId(id);
-        StoreDetailDTO storeDetailDTO = new StoreDetailDTO(storeEntity, businessTimeEntity);
+        List<HolidayDAO> holidayEntity = holidayRepository.findByStoreId(id);
+        StoreDetailDTO response = new StoreDetailDTO(storeEntity, businessTimeEntity, holidayEntity);
 
         System.out.println("StoreService.findById()");
-        return storeDetailDTO;
+        return response;
     }
 
     @Transactional

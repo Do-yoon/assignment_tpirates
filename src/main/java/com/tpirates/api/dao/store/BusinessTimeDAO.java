@@ -13,19 +13,19 @@ import java.time.LocalTime;
 public class BusinessTimeDAO {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long key;
+    private Long key;
 
     @Column(nullable = false)
-    Long id;
+    private Long id;
 
     @Column(length = 10, nullable = false)
-    Long day;
+    private Long day;
 
     @Column(nullable = false)
-    LocalTime open;
+    private LocalTime open;
 
     @Column(nullable = false)
-    LocalTime close;
+    private LocalTime close;
 
     @Builder
     public BusinessTimeDAO(Long id, Long day, LocalTime open, LocalTime close) {

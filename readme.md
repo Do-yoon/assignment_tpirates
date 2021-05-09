@@ -38,9 +38,9 @@
 
 #### 상세설명
 * Post
-* Long addStore(String name, String owner, String description, Long level, String address, String phone, Date[] businessTimes)
-* /v0/store/addStore?name={name}&owner={owner}&description={description}&level={level}&address={address}&phone={phone}&businessTimes={businessTimes}
-* businessTimes 데이터는 아래와 같은 형식으로 들어온다고 가정했습니다.
+* Long addStore(StoreRegDTO storeRegDTO)
+* /v0/store/addStore
+* id 값 반환
 <br/>
   
 
@@ -58,8 +58,9 @@
 
 #### 상세설명
 * Post
-* Long regStoreHoliday(Date[] holidays)
-* url: /v0/store/regStoreHoliday?id={id}&holidays={holidays}
+* Long regStoreHoliday(Long id, HolidayRegDTO holidays)
+* url: /v0/store/regStoreHoliday/id\
+* id 값 반환
 
 <br/>
 
@@ -77,6 +78,7 @@
 * Get
 * List\<StoreListDTO> getStoreList()
 * url: /v0/store/storeList
+* 전체 목록 조회 / 시간에 따른 영업 상태 반환 
 
 <br/> 
 
@@ -89,6 +91,8 @@
 * Get
 * List\<StoreDetailDTO> getStoreDetail(Long id)
 * url: /v0/store/storeDetails?id={id}
+* 최근 3영업일 기준 조회 
+* json 형태의 점포 정보 반환
 
 <br/>
 
@@ -101,3 +105,4 @@
 * Delete(Post)
 * Long deleteStore(Long id)
 * url: /v0/store/deleteStore?id={id}
+* id 값 반환

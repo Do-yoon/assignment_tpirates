@@ -6,7 +6,7 @@ import lombok.Getter;
 
 import java.time.LocalTime;
 
-@Data
+@Getter
 public class BusinessTimeDTO {
     String day;
     LocalTime open;
@@ -22,22 +22,29 @@ public class BusinessTimeDTO {
     }
 
     private Long weekDay() {
-        int n = 7;
+        int n = 8;
         switch (this.day) {
-            case "Sunday":
-                n -= 7;
             case "Monday":
-                n -= 6;
+                n -= 7;
+                break;
             case "Tuesday":
-                n -= 5;
+                n -= 6;
+                break;
             case "Wednesday":
-                n -= 4;
+                n -= 5;
+                break;
             case "Thursday":
-                n -= 3;
+                n -= 4;
+                break;
             case "Friday":
-                n -= 2;
+                n -= 3;
+                break;
             case "Saturday":
+                n -= 2;
+                break;
+            case "Sunday":
                 n -= 1;
+                break;
         }
 
         return new Long(n);

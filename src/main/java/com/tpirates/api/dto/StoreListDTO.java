@@ -39,7 +39,7 @@ public class StoreListDTO {
                 return "HOLIDAY";
         }
 
-        int dayValue = day.getValue();
+        int dayValue = todayDate.getDayOfWeek().getValue();
 
         // check whether open or not
         for (BusinessTimeDAO businessTime: businessTimes) {
